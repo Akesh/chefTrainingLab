@@ -5,4 +5,18 @@ log "Welcome to Chef, #{node["starter_name"]}!" do
   level :info
 end
 
+template "/etc/myserver.conf" do
+      source "sample.erb"
+      owner "root"
+      group "root"
+      mode "644"
+      variables :hostname => node["fqdn"], :servers => ["alpha", "bravo", "charlie"]
+    end
+
+log "Welcome to Template resource" do
+  name = <%= @hostname %>
+  level :info  
+end
+     
+
 # For more information, see the documentation: https://docs.chef.io/essentials_cookbook_recipes.html
