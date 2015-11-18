@@ -13,10 +13,9 @@ template "/etc/myserver.conf" do
       variables :hostname => node["fqdn"], :servers => ["alpha", "bravo", "charlie"]
     end
 
-log "Welcome to Template resource" do
-  name = <%= @hostname %>
-  level :info  
-end
+ <% @servers.each do |name| %>
+ ServerAlias <%= name %>;
+ <% end %>
      
 
 # For more information, see the documentation: https://docs.chef.io/essentials_cookbook_recipes.html
